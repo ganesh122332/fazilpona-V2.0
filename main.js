@@ -234,6 +234,17 @@ saveDetailsBtn.onclick = async () => {
         dorrt.hidden = false;
         return;
     }
+    // try {
+    // const aliasRef = doc(db, "alias", alias.value);
+    // const aliasSnap = await getDoc(aliasRef);
+
+    // if (aliasSnap.exists()) {
+    //     alert("⚠️ This alias name is already taken! Try another one.");
+    //     document.getElementById("errAlrt").style.display = "block";
+    //     document.getElementById("msg").innerText = "Alias ";
+    //     acLoader.classList.add("hidden");
+    //     return; // stop here
+    // }
     try {
         await setDoc(doc(db, "users", currentUser.uid), {
             uid: currentUser.uid, email: currentUser.email, dob: dob.value, alias: alias.value, bio: bio.value, name: name.value, mobile: mobile.value, firstLogin: new Date().toISOString()
@@ -308,5 +319,4 @@ closeBtn.onclick = () => {
 
 document.getElementById("scroll-botm").addEventListener("click", () => {
     messagesDiv.scrollTo({ top: messagesDiv.scrollHeight, behavior: "smooth" });
-
 });
