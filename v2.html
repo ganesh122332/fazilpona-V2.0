@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gonu Chat V-1.0</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+  <div id="app" class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 space-y-4">
+    <!-- LOGIN / SIGNUP FORM -->
+    <div id="auth-section">
+      <h1 class="text-2xl font-bold text-center mb-4">🔥 Login / Sign Up</h1>
+      <input id="email" type="email" placeholder="Email" class="border p-2 w-full rounded mb-2" />
+      <input id="password" type="password" placeholder="Password" class="border p-2 w-full rounded mb-2" />
+      <button id="loginBtn" class="bg-blue-500 text-white w-full py-2 rounded mb-2">Login</button>
+      <button id="signupBtn" class="bg-green-500 text-white w-full py-2 rounded">Sign Up</button>
+    </div>
+
+    <!-- USER DETAILS FORM -->
+    <div id="details-section" class="hidden">
+      <h1 class="text-xl font-semibold mb-4">📝 Enter Your Details</h1>
+      <input id="dob" type="date" class="border p-2 w-full rounded mb-2" />
+      <input id="alias" type="text" placeholder="Alias Name" class="border p-2 w-full rounded mb-2" />
+      <textarea id="bio" placeholder="Write your bio..." class="border p-2 w-full rounded mb-2"></textarea>
+      <button id="saveDetailsBtn" class="bg-purple-500 text-white w-full py-2 rounded">Save Details</button>
+    </div>
+
+    <!-- CHAT AREA -->
+    <div id="chat-section" class="hidden flex flex-col h-[400px]">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-bold">💬 Group Chat</h2>
+        <button id="logoutBtn" class="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+      </div>
+      <div id="messages" class="flex-1 overflow-y-auto border p-2 rounded bg-gray-50 mb-2"></div>
+      <div class="flex">
+        <input id="messageInput" type="text" placeholder="Type a message..." class="border p-2 flex-1 rounded-l" />
+        <button id="sendBtn" class="bg-blue-500 text-white px-4 rounded-r">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { 
+      getFirestore, collection, addDoc, getDocs, getDoc, doc, setDoc, onSnapshot, query, orderBy 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { 
+      getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDFRveJlgcd5wIfclx28vYxos_w2S7z59M",
+  authDomain: "ff-tournament-gonu.firebaseapp.com",
+  projectId: "ff-tournament-gonu",
+  storageBucket: "ff-tournament-gonu.firebasestorage.app",
+  messagingSenderId: "963168625937",
+  appId: "1:963168625937:web:93a319df3e2838caeb98b0",
+  measurementId: "G-FWSJE93RJF"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // 🔄 Element references
+    const authSection = document.getElementById("auth-section");
+    const detailsSection = document.getElementById("details-section");
+    const chatSection = document.getElementById("chat-section");
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const saveDetailsBtn = document.getElementById("saveDetailsBtn");
+    const sendBtn = document.getElementById("sendBtn");
+
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const dob = document.getElementById("dob");
+    const alias = document.getElementById("alias");
+    const bio = document.getElementById("bio");
+    const messageInput = document.getElementById("messageInput");
+    const messagesDiv = document.getElementById("messages");
+
+    let currentUser = null;
+    let currentAlias = "";
+
+    // 🧠 Auth Listener
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        // Check if user details already exist
+        const userDoc = doc(db, "users", user.uid);
+        const snap = await getDoc(userDoc);
+        if (snap.exists()) {
+          currentAlias = snap.data().alias || "Unknown";
+          showChat();
+        } else {
+          showDetailsForm();
+        }
+      } else {
+        showAuth();
+      }
+    });
+
+    // 🧩 UI Switching
+    function showAuth() {
+      authSection.classList.remove("hidden");
+      detailsSection.classList.add("hidden");
+      chatSection.classList.add("hidden");
+    }
+
+    function showDetailsForm() {
+      authSection.classList.add("hidden");
+      detailsSection.classList.remove("hidden");
+      chatSection.classList.add("hidden");
+    }
+
+    function showChat() {
+      authSection.classList.add("hidden");
+      detailsSection.classList.add("hidden");
+      chatSection.classList.remove("hidden");
+      loadMessages();
+    }
+
+    // 🔐 Login
+    loginBtn.onclick = async () => {
+      try {
+        await signInWithEmailAndPassword(auth, email.value, password.value);
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    // 🆕 Signup
+    signupBtn.onclick = async () => {
+      try {
+        await createUserWithEmailAndPassword(auth, email.value, password.value);
+        alert("Account created! Please fill your details.");
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    // 💾 Save user details
+    saveDetailsBtn.onclick = async () => {
+      try {
+        await setDoc(doc(db, "users", currentUser.uid), {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          dob: dob.value,
+          alias: alias.value,
+          bio: bio.value
+        });
+        currentAlias = alias.value;
+        showChat();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    // ✉️ Send message
+    sendBtn.onclick = async () => {
+      if (messageInput.value.trim() === "") return;
+      try {
+        await addDoc(collection(db, "massages"), {
+          uid: currentUser.uid,
+          alias: currentAlias,
+          text: messageInput.value,
+          time: new Date()
+        });
+        messageInput.value = "";
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    // 👂 Real-time messages
+    function loadMessages() {
+      const q = query(collection(db, "massages"), orderBy("time"));
+      onSnapshot(q, snapshot => {
+        messagesDiv.innerHTML = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement("div");
+          div.className = "p-2 mb-1 bg-blue-100 rounded";
+          div.textContent = `${data.alias || "Unknown"}: ${data.text}`;
+          messagesDiv.appendChild(div);
+        });
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      });
+    }
+
+    // 🚪 Logout
+    logoutBtn.onclick = async () => {
+      await signOut(auth);
+      alert("Logged out!");
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ফাজিলপনা V-1.9</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div id="app" class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 flex flex-col space-y-4">
+        <div id="acLoader" class="flex flex-col items-center space-y-4">
+            <div class="flex">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <p class="text-gray-600 font-medium tracking-wide animate-pulse">Loading...</p>
+        </div>
+        <!-- AUTH -->
+        <div id="auth-section" class="hidden">
+            <h1 class="text-2xl font-bold text-center mb-4">User Login Page </h1>
+            <input id="email" type="email" placeholder="Enter Email" class="border p-2 w-full rounded mb-2" />
+            <input id="password" type="password" placeholder="Enter Password" class="border p-2 w-full rounded mb-2" />
+            <div id="authBtn">
+                <button id="loginBtn">Login</button>
+                <button id="signupBtn">Sign Up</button>
+            </div>
+            <p
+                style="margin:15px 0; font-weight:bold; margin-bottom: 5px;margin-top:20px;font-size: smaller;text-align: center;">
+                OR</p>
+            <div id="googleBtn1" class="logoes">
+                <img id="googleBtn" src="https://i.ibb.co/QvbxLrH7/ggl-1.png" alt="google logo">Continue with Google
+            </div>
+            <p id="message"></p>
+            <div type="button" id="infotxt">Forget your Password? </div>
+        </div>
+
+        <!-- DETAILS -->
+        <div id="details-section" class="hidden">
+            <h1 class="text-xl font-semibold mb-4">📝 Enter Your Details</h1>
+            <input id="name" type="text" placeholder="Enter Full Name..." class="border p-2 w-full rounded mb-2" />
+            <div id="emailArea" class="border p-2 w-full rounded mb-2 h-10">s</div>
+            <input id="dob" type="date" class="border p-2 w-full rounded mb-2" />
+            <input id="alias" type="text" placeholder="Alias Name" class="border p-2 w-full rounded mb-2" />
+            <input id="mobile" type="number" placeholder="Enter Mobile Number..."
+                class="border p-2 w-full rounded mb-2" />
+            <textarea id="bio" placeholder="Write your bio..." class="border p-2 w-full rounded mb-2"></textarea>
+            <button id="saveDetailsBtn" class="bg-purple-500 text-white w-full py-2 rounded">Save Details</button>
+        </div>
+
+        <!-- CHAT -->
+        <div id="chat-section" class="hidden flex flex-col h-[500px]">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold">💬 ফাজিলপনা <span id="chatCnt">sent</span></h2>
+                <div id="opt">
+                    <button id="scroll-botm" class="bg-red-200 text-white px-3 py-1 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-8 h-8 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <button id="account" onclick="window.location.href='account.html'"
+                        class="bg-blue-200 text-white px-3 py-1 rounded"><svg xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-8 h-8 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 21a9.75 9.75 0 0115 0" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+            <div id="messages" class="flex-1 overflow-y-auto border p-2 rounded bg-gray-50 mb-2 flex flex-col space-y-1"
+                style="scrollbar-width: none;">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="flex">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <p class="text-gray-600 font-medium tracking-wide animate-pulse">Loading Chats...</p>
+                </div>
+            </div>
+            <div class="flex">
+                <input id="messageInput" type="text" placeholder="Type a message..."
+                    class="border p-2 flex-1 rounded-l" />
+                <button id="sendBtn" class="bg-blue-500 text-white px-4 rounded-r">Send</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- All alerts Popups -->
+    <div id="errAlrt">
+        <div id="headd">Alert !</div>
+        <hr id="hrline">
+        <div id="msg">This is an alert message.</div>
+        <button id="closeBtn">✕</button>
+    </div>
+    <!-- reset pass -->
+    <div id="wrapper" style="display: none;">
+        <div id="forgetpass">
+            <h2>Reset Password</h2>
+            <hr>
+            <input type="email" id="resetEmail" placeholder="Enter Email to send reset link">
+            <div id="btnCnt">
+                <button id="resetBtn">Send Link</button>
+                <button id="closeBtn2" style="background-color: #e76b62;"
+                    onclick="document.getElementById('wrapper').style.display = 'none';">Close</button>
+            </div>
+            <p id="resetMsg"></p>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

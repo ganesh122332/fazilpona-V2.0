@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="account-container">
+    <div class="account-card">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="avatar" id="avatar">A</div>
+        <div class="profile-info">
+          <h2 id="name"></h2>
+          <p id="alias"></p>
+        </div>
+      </div>
+
+      <!-- Account Details -->
+      <div class="details">
+        <div class="detail-row">
+          <span>Email</span>
+          <div class="detail-value">
+            <span id="email">testmailnulll.com</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="check-icon" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span>Date of Birth</span>
+          <div class="detail-value">
+            <span id="dob">nothing</span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span>First Login</span>
+          <div class="detail-value">
+            <span id="first-login">null</span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span>UID</span>
+          <div class="detail-value">
+            <span id="uid">nan</span>
+           
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span>Mobile</span>
+          <div class="detail-value">
+            <span id="mobile">Not Linked</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    // Auto-generate first letter for avatar
+    const name = document.getElementById("name").textContent.trim();
+    document.getElementById("avatar").textContent = name.charAt(0).toUpperCase();
+  </script>
+</body>
+</html>

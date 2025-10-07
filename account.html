@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="loader.css">
+</head>
+
+<body>
+    <div class="account-container">
+
+        <div id="acLoader" class="loader" hidden></div>
+        <div class="account-card" id="account-card" hidden>
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="avatar" id="avatar"></div>
+                <div class="profile-info">
+                    <div id="editTg">
+                        <h2 id="name2">LOADIN NAME</h2>
+                        <svg id="editTop" xmlns="http://www.w3.org/2000/svg" class="topEdt" viewBox="0 0 24 24" fill="none"
+                            stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
+                        </svg>
+                    </div>
+                    <p id="alias2">@LOADING...</p>
+                </div>
+
+            </div>
+
+            <b>
+                <div id="bio2">
+                    Loading...
+                </div>
+            </b>
+            <!-- Account Details -->
+            <div class="details">
+                <div class="detail-row">
+                    <span>Email :</span>
+                    <div class="detail-value">
+                        <span id="email2">Loading...</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="check-icon" viewBox="0 0 24 24" fill="none"
+                            stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg>
+
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span>Date of Birth :</span>
+                    <div class="detail-value">
+                        <span id="dob2">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span>First Login :</span>
+                    <div class="detail-value">
+                        <span id="first-login2">Loading...</span>
+
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span>UID :</span>
+                    <div class="detail-value">
+                        <span id="uid2">Loading...</span>
+
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span>Mobile:</span>
+                    <div class="detail-value">
+                        <span id="mobile2">Loading...</span>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <span>Logged in Via : </span>
+                    <div class="detail-value">
+                        <span id="prvdr">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <button class="reset-btn" id="reset-pass">Forgot Password</button>
+                <button class="logout-btn" id="logoutBtn2">Logout</button>
+            </div>
+        </div>
+        <!-- navigations -->
+        <div id="navigations">
+            <div id="edit-btn1" class="wcorr">
+                <svg xmlns="http://www.w3.org/2000/svg" class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="#666"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
+                </svg>
+                <b><span id="mobSh">Edit Details</span></b>
+            </div>
+            <div id="edit-btn2" class="wcorr">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="edit-icon" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.8" stroke="currentColor" class="menu-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10" />
+                </svg><b><span id="mobSh">Options</span></b>
+            </div>
+            <div id="edit-btn3" class="wcorr" onclick="window.location.href='index.html'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="edit-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 9.75L12 3l9 6.75V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21V9.75z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 22V12h6v10" />
+                </svg>
+                <b><span id="mobSh">Home Page</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Details -->
+    <div id="mainEditCont" hidden>
+        <div id="headCnt">
+            <h2 id="hdEdt">Edit Account Details</h2>
+            <hr id="hrline2">
+        </div>
+        <div id="flexCntnt">
+            <label for="nameEdit">
+                <div id="nameLbl" class="lbl">1. Full Name : </div>
+            </label>
+            <input id="nameEdit" type="text" placeholder="Enter Full Name..." />
+            <label for="bioEdit">
+                <div id="nameLbl" class="lbl">2. Bio / Description : </div>
+            </label>
+            <input id="bioEdit" type="text" placeholder="Enter Your Bio..." />
+            <label for="dobEdit">
+                <div id="dobLbl" class="lbl">3. Birth Date : </div>
+            </label>
+            <input id="dobEdit" type="date" />
+            <label for="aliasEdit">
+                <div id="aliasLbl" class="lbl">4. Nickname / Alias : </div>
+            </label>
+            <input id="aliasEdit" type="text" placeholder="Alias Name" />
+            <label for="mobileEdit">
+                <div id="mobLbl" class="lbl">5. Mobile NO : </div>
+            </label>
+            <input id="mobileEdit" type="number" placeholder="Enter Mobile Number..." />
+            <div id="adDtl"></div>
+        </div>
+        <div id="footCnt">
+            <input type="button" value="Reset Password" id="reset-pass2" />
+            <input type="button" value="Save Details" id="saveDetailsBtn2" />
+            <input type="button" value="Cancel" id="cancelBtnEdit" />
+        </div>
+    </div>
+    <!-- Alert Popup -->
+    <div id="errAlrt">
+        <div id="headd">Alert !</div>
+        <hr id="hrline">
+        <div id="msg">This is an alert message.</div>
+        <button id="closeBtn">✕</button>
+    </div>
+    <script type="module" src="account.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+#main-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+#flex-put {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#infotxt {
+    background: none;
+    color: #335cef;
+    border: nne;
+    cursor: pointer;
+    font-size: smaller;
+    text-align: right;
+    width: fit-content;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    right: -65%;
+}
+
+#infotxt:hover {
+    text-decoration: underline;
+    transition: all 0.3s ease-in-out;
+
+}
+
+
+#wrapper {
+    background-color: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+#forgetpass {
+    background-color: #ffffff;
+    color: #335cef;
+    border-radius: 20px;
+    font-size: smaller;
+    box-shadow: 0 0 10px 2px #00000036;
+    text-align: right;
+    width: 350px;
+    padding: 20px;
+    height: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+
+}
+
+#forgetpass h2 {
+    margin-top: 0;
+    color: #4a94e9;
+    text-align: center;
+}
+
+#forgetpass input[type="email"] {
+    width: 96%;
+    margin: 15px 0;
+    background-color: #f6f6f6;
+    border: 1px solid #cccccccf;
+    font-size: small;
+    height: 30px;
+    border-radius: 7px;
+    padding-left: 10px;
+}
+
+#btnCnt {
+    display: flex;
+    justify-content: space-between;
+}
+
+#forgetpass button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#resetBtn:hover {
+    background-color: #1168c5;
+}
+
+#closeBtn2:hover {
+    background-color: #8d3b36;
+}
+
+#resetMsg {
+    text-align: left;
+    color: #338989;
+}
+
+#googleBtn1 img {
+    width: 27px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+#googleBtn1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid #7b7b7ba0;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: fit-content;
+    margin: auto;
+    transition: all 0.3s ease-in-out;
+    font-size: medium;
+    box-shadow: 0 0 5px 1px #00000018;
+}
+
+
+#googleBtn1:hover {
+    transform: scale(1.03);
+
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: red;
+    text-align: center;
+}
