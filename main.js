@@ -235,16 +235,6 @@ saveDetailsBtn.onclick = async () => {
         return;
     }
     try {
-    const aliasRef = doc(db, "alias", alias.value);
-    const aliasSnap = await getDoc(aliasRef);
-
-    if (aliasSnap.exists()) {
-        document.getElementById("errAlrt").style.display = "block";
-        document.getElementById("msg").innerText = "Alias name already taken! Try another one.";
-        acLoader.classList.add("hidden");
-        return; 
-    }
-    try {
         await setDoc(doc(db, "users", currentUser.uid), {
             uid: currentUser.uid, email: currentUser.email, dob: dob.value, alias: alias.value, bio: bio.value, name: name.value, mobile: mobile.value, firstLogin: new Date().toISOString()
         });
@@ -318,4 +308,5 @@ closeBtn.onclick = () => {
 
 document.getElementById("scroll-botm").addEventListener("click", () => {
     messagesDiv.scrollTo({ top: messagesDiv.scrollHeight, behavior: "smooth" });
+
 });
